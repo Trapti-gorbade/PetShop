@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb+srv://Trapti:tkg4002@cluster0.a97rcaf.mongodb.net/?retryWrites=true&w=majority")
+mongoose.connect("mongodb://127.0.0.1:27017/tutorial")
 .then(()=>{
     console.log("mongodb connected");
 })

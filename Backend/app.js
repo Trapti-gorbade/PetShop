@@ -1,15 +1,23 @@
 const express = require("express")
 const cors = require("cors")
+
 const app = express()
+
 
 app.use(cors({}));
 app.use(express.json());
+
 
 require("./conn.js")
 const feedback = require('./feedback')
 
 const collection = require("./mongo")
 const cart = require("./cart")
+
+const birds = require("./birds");
+const BirdsData = require("./birds");
+
+
 
 //Get Data from MongoDB
 app.get("/getData",async (req,res)=>{
@@ -48,12 +56,10 @@ app.post("/login",async(req,res)=>{
 
 app.post("/signup",async(req,res)=>{
     const{email,password}=req.body
-
     const data={
         email:email,
         password:password
     }
-
     try{
         const check=await collection.findOne({email:email})
 
@@ -69,8 +75,11 @@ app.post("/signup",async(req,res)=>{
     catch(e){
         res.json("fail")
     }
-
 })
+
+
+
+
 
 app.post("/EnquiryForm",async(req,res)=>{
     const {email, name, phone, message}=req.body;
@@ -126,6 +135,10 @@ app.post("/Feedback",async(req,res)=>{
         res.json("fail")
     }
 })
+
+
+
+
 app.listen(8000, (err) => {
     if (err) throw "Error";
     console.log("Listening to port ", 8000);
